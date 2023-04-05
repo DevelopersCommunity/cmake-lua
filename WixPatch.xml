@@ -1,0 +1,20 @@
+<CPackWiXPatch>
+  <!--  Fragment ID is from [build/_CPack_Packages/win64/WIX/features.wxs] -->
+  <CPackWiXFragment Id="CM_CP_bin.lua.exe">
+    <Environment
+      Id='UpdatePath'
+      Name='PATH'
+      Action='set'
+      Permanent='no'
+      Part='last'
+      Value='[INSTALL_ROOT]bin'
+    />
+  </CPackWiXFragment>
+
+  <!-- Allow installation by non-administrative users -->
+  <!-- https://learn.microsoft.com/windows/win32/msi/allusers -->
+  <CPackWiXFragment Id="#PRODUCT">
+    <Property Id="ALLUSERS" Value="2" />
+    <Property Id="MSIINSTALLPERUSER" Value="1" />
+  </CPackWiXFragment>
+</CPackWiXPatch>
