@@ -7,7 +7,10 @@ on:
         required: true
         type: string
 jobs:
+  package:
+    uses: ./.github/workflows/reusable-package.yml
   release:
+    needs: package
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v3

@@ -1,0 +1,21 @@
+name: Reusable package
+on:
+  workflow_call:
+jobs:
+  reusable_package:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Ninja
+        run: choco install ninja
+      - name: Generate Ninja build
+        run: cmake -B build -G Ninja -D CMAKE_BUILD_TYPE=RelWithDebInfo -D CMAKE_C_COMPILER=clang
+      - name: Package
+        run: cmake --build build --target package
+      - uses: actions/upload-artifact@v3
+        with:
+          name: package
+          path: |
+            build/*.msi
+            build/*.zip
+          if-no-files-found: error
