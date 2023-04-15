@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 name: Reusable package
 on:
   workflow_call:
 jobs:
   reusable_package:
+=======
+name: Package
+on:
+  workflow_call:
+jobs:
+  package:
+>>>>>>> ba89569885791640bbd36f20cec2f920b0018834
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
