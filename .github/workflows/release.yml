@@ -7,6 +7,8 @@ on:
         required: true
         type: string
 jobs:
+  package:
+    uses: ./.github/workflows/reusable-package.yml
   release:
     runs-on: ubuntu-latest
     steps:
