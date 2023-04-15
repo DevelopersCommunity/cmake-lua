@@ -1,0 +1,24 @@
+name: Package
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  package:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Ninja
+        run: choco install ninja
+      - name: Generate Ninja build
+        run: cmake -B build -G Ninja -D CMAKE_BUILD_TYPE=RelWithDebInfo
+      - name: Package
+        run: cmake --build build --target package
+      - uses: actions/upload-artifact@v3
+        with:
+          name: package
+          path: build/*.msi
+          if-no-files-found: error
