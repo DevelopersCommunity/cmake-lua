@@ -17,5 +17,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: package
-          path: build/*.msi
+          path: |
+            build/*.msi
+            build/*.zip
           if-no-files-found: error
