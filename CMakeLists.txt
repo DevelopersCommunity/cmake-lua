@@ -1,6 +1,11 @@
 cmake_minimum_required(VERSION 3.26)
 set(LUA_VERSION 5.4.4)
-project(Lua VERSION ${LUA_VERSION} LANGUAGES C)
+project(Lua
+  VERSION ${LUA_VERSION}
+  DESCRIPTION "Lua and LuaRocks packaged by DEVCOM"
+  HOMEPAGE_URL https://github.com/DevelopersCommunity/cmake-lua
+  LANGUAGES C
+  )
 
 set(LUA_TARBALL lua-${CMAKE_PROJECT_VERSION}.tar.gz)
 set(LUA_TARBALL_SHA1 03c27684b9d5d9783fb79a7c836ba1cdc5f309cd)
@@ -122,4 +127,5 @@ else()
 endif()
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_LIST_DIR}/LICENSE.txt")
 set(CPACK_PACKAGE_INSTALL_DIRECTORY ${CMAKE_PROJECT_NAME})
+set(CPACK_PACKAGE_VENDOR DEVCOM)
 include(CPack)
