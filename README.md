@@ -5,10 +5,18 @@ This is a CMake-based project to build and package [Lua](https://lua.org/) and
 repository](https://luabinaries.sourceforge.net/) is not updated very
 frequently, and the [compilation
 process](https://www.lua.org/manual/5.4/readme.html) for Windows binaries is not
-easy for non-C developers, you can use this project to build an updated version
-of Lua.
+straightforward for non-C developers, you can use this project to build an
+updated version of Lua.
 
-## Prerequisites
+The installer is used by the `DEVCOM.Lua`
+[winget](https://learn.microsoft.com/windows/package-manager/) package. You can
+install it with the following command:
+
+```powershell
+winget install --id DEVCOM.Lua
+```
+
+## Build prerequisites
 
 - C compiler ([Microsoft Visual
   C++](https://learn.microsoft.com/cpp/overview/visual-cpp-in-visual-studio) or
