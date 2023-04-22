@@ -23,15 +23,19 @@ winget install --id DEVCOM.Lua
   [Clang](https://clang.llvm.org/))
 - [CMake](https://cmake.org/)
 - [Ninja](https://ninja-build.org/)
+- [ImageMagick](https://imagemagick.org/)
+- [GhostScript](https://www.ghostscript.com/)
 - [WiX v3](https://wixtoolset.org/docs/wix3/) (if packaging on Windows)
 
-You can install the first three components with the following
+You can install the first five components with the following
 [winget](https://learn.microsoft.com/windows/package-manager/winget/) commands:
 
 ```powershell
 winget install --id LLVM.LLVM
 winget install --id Kitware.CMake
 winget install --id Ninja-build.Ninja
+winget install --id ImageMagick.ImageMagick
+winget install --id ArtifexSoftware.GhostScript
 ```
 
 WiX v3 is available at <https://github.com/wixtoolset/wix3/releases/>. It
@@ -59,6 +63,8 @@ Check if `PATH` was set correctly:
 Get-Command clang
 Get-Command cmake
 Get-Command ninja
+Get-Command magick
+Get-Command gswin64
 ```
 
 You may need to restart your Windows session if you can't find `ninja` even
