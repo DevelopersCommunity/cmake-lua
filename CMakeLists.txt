@@ -43,7 +43,7 @@ if(WIN32)
   add_custom_command(OUTPUT lua.ico
     COMMAND magick ${CMAKE_CURRENT_LIST_DIR}/${LUA_LOGO} -resize 256x256 lua.ico
     MAIN_DEPENDENCY ${CMAKE_CURRENT_LIST_DIR}/${LUA_LOGO}
-    COMMENT Generating Lua icon
+    COMMENT "Generating Lua icon"
     )
   add_custom_target(luaicon ALL DEPENDS lua.ico)
 endif()
