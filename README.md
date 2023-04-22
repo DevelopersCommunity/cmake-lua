@@ -25,7 +25,7 @@ winget install --id DEVCOM.Lua
 - [Ninja](https://ninja-build.org/)
 - [ImageMagick](https://imagemagick.org/)
 - [GhostScript](https://www.ghostscript.com/)
-- [WiX v3](https://wixtoolset.org/docs/wix3/) (if packaging on Windows)
+- [WiX v3](https://wixtoolset.org/docs/wix3/)
 
 You can install the first five components with the following
 [winget](https://learn.microsoft.com/windows/package-manager/winget/) commands:
