@@ -49,7 +49,8 @@ Update your path environment with `setx` (supposing you installed the tools in
 their default directories):
 
 ```powershell
-setx PATH ($(Get-ItemProperty -Path HKCU:\Environment -Name Path).Path + "$env:ProgramFiles\LLVM\bin;${env:ProgramFiles(x86)}\WiX Toolset v3.11\bin")
+setx PATH ($(Get-ItemProperty -Path HKCU:\Environment -Name Path).Path + `
+    "$env:ProgramFiles\LLVM\bin")
 ```
 
 Check if `PATH` was set correctly:
@@ -58,7 +59,6 @@ Check if `PATH` was set correctly:
 Get-Command clang
 Get-Command cmake
 Get-Command ninja
-Get-Command candle
 ```
 
 You may need to restart your Windows session if you can't find `ninja` even
