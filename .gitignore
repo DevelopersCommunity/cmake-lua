@@ -16,3 +16,4 @@ lua-*/
 luarocks-*/
 *.gz
 *.zip
+lua-logo-nolabel.ps

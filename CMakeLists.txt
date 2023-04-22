@@ -32,6 +32,20 @@ if(WIN32)
       DESTINATION ${CMAKE_CURRENT_LIST_DIR}
       )
   endif()
+
+  set(LUA_LOGO lua-logo-nolabel.ps)
+  if(NOT EXISTS ${CMAKE_CURRENT_LIST_DIR}/${LUA_LOGO})
+    file(DOWNLOAD https://www.lua.org/images/${LUA_LOGO}
+      ${CMAKE_CURRENT_LIST_DIR}/${LUA_LOGO}
+      )
+  endif()
+
+  add_custom_command(OUTPUT lua.ico
+    COMMAND magick ${CMAKE_CURRENT_LIST_DIR}/${LUA_LOGO} -resize 256x256 lua.ico
+    MAIN_DEPENDENCY ${CMAKE_CURRENT_LIST_DIR}/${LUA_LOGO}
+    COMMENT Generating Lua icon
+    )
+  add_custom_target(luaicon ALL DEPENDS lua.ico)
 endif()
 
 set(LUA_SRC lua-${CMAKE_PROJECT_VERSION}/src)
@@ -117,7 +131,7 @@ install(TARGETS lualib FILE_SET include)
 if(WIN32)
   set(CPACK_GENERATOR ZIP WIX)
   set(CPACK_WIX_UPGRADE_GUID "3e5a792d-9d31-41d5-a93f-629ab7c7683d")
-  set(CPACK_WIX_PRODUCT_ICON ${CMAKE_CURRENT_LIST_DIR}/lua.ico)
+  set(CPACK_WIX_PRODUCT_ICON lua.ico)
   list(APPEND CPACK_WIX_EXTENSIONS WixUtilExtension)
   list(APPEND CPACK_WIX_PATCH_FILE ${CMAKE_CURRENT_LIST_DIR}/WixPatch.xml)
 else()
