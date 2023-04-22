@@ -6,8 +6,8 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Install Ninja
-        run: choco install ninja
+      - name: Install required tools
+        run: choco install ninja imagemagick ghostscript
       - name: Generate Ninja build
         run: cmake -B build -G Ninja -D CMAKE_BUILD_TYPE=RelWithDebInfo -D CMAKE_C_COMPILER=clang
       - name: Package
