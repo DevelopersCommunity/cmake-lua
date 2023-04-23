@@ -94,17 +94,17 @@ set (LUAC
   ${LUA_SRC}/luac.c
   )
 
-include(CheckLibraryExists)
-check_library_exists(m pow "" LIBEXISTS)
-if(LIBEXISTS)
-  set(LIBM "m")
-endif()
-
 add_executable(lua ${LUA} ${LIB})
-target_link_libraries(lua PUBLIC ${LIBM})
-
 add_executable(luac ${LUAC} ${LIB})
-target_link_libraries(luac PUBLIC ${LIBM})
+
+if(NOT WIN32)
+  include(CheckLibraryExists)
+  check_library_exists(m pow "" LIBEXISTS)
+  if(LIBEXISTS)
+    target_link_libraries(lua PUBLIC m)
+    target_link_libraries(luac PUBLIC m)
+  endif()
+endif()
 
 add_library(lualib SHARED ${LIB})
 target_sources(lualib
