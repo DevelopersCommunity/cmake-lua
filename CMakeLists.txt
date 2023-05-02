@@ -33,20 +33,6 @@ if(WIN32)
       DESTINATION ${CMAKE_CURRENT_LIST_DIR}
       )
   endif()
-
-  set(LUA_LOGO lua-logo-nolabel.ps)
-  if(NOT EXISTS ${CMAKE_CURRENT_LIST_DIR}/${LUA_LOGO})
-    file(DOWNLOAD https://www.lua.org/images/${LUA_LOGO}
-      ${CMAKE_CURRENT_LIST_DIR}/${LUA_LOGO}
-      )
-  endif()
-
-  add_custom_command(OUTPUT lua.ico
-    COMMAND magick ${CMAKE_CURRENT_LIST_DIR}/${LUA_LOGO} -resize 256x256 lua.ico
-    MAIN_DEPENDENCY ${CMAKE_CURRENT_LIST_DIR}/${LUA_LOGO}
-    COMMENT "Generating Lua icon"
-    )
-  add_custom_target(luaicon ALL DEPENDS lua.ico)
 endif()
 
 set(LUA_SRC lua-${CMAKE_PROJECT_VERSION}/src)
@@ -128,19 +114,22 @@ endif()
 
 install(TARGETS lua luac)
 install(TARGETS lualib FILE_SET include)
+install(FILES ${CMAKE_CURRENT_LIST_DIR}/LICENSE.txt TYPE DOC)
 
 if(WIN32)
-  set(CPACK_GENERATOR ZIP WIX)
-  set(CPACK_WIX_UPGRADE_GUID "3e5a792d-9d31-41d5-a93f-629ab7c7683d")
-  set(CPACK_WIX_PRODUCT_ICON lua.ico)
-  list(APPEND CPACK_WIX_EXTENSIONS WixUtilExtension)
-  list(APPEND CPACK_WIX_PATCH_FILE ${CMAKE_CURRENT_LIST_DIR}/WixPatch.xml)
+  set(CPACK_GENERATOR ZIP)
+  install(FILES
+    ${CMAKE_CURRENT_BINARY_DIR}/lua.pdb
+    ${CMAKE_CURRENT_BINARY_DIR}/luac.pdb
+    ${CMAKE_CURRENT_BINARY_DIR}/lua54.pdb
+    DESTINATION bin)
 else()
   install(FILES ${LUA_DOC}/lua.1 ${LUA_DOC}/luac.1
     DESTINATION man/man1
     )
 endif()
-set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_LIST_DIR}/LICENSE.txt")
+set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY OFF)
+set(CPACK_RESOURCE_FILE_LICENSE ${CMAKE_CURRENT_LIST_DIR}/LICENSE.txt)
 set(CPACK_PACKAGE_INSTALL_DIRECTORY ${CMAKE_PROJECT_NAME})
 set(CPACK_PACKAGE_VENDOR DEVCOM)
 include(CPack)

@@ -16,6 +16,5 @@ jobs:
         with:
           name: build
           path: |
-            build/*.msi
             build/*.zip
           if-no-files-found: error
