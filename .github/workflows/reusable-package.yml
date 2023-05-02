@@ -7,7 +7,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install required tools
-        run: choco install ninja
+        run: choco install ninja ghostscript
       - name: Generate Ninja build
         run: cmake -B build -G Ninja -D CMAKE_BUILD_TYPE=RelWithDebInfo -D CMAKE_C_COMPILER=clang
       - name: Package
@@ -16,5 +16,6 @@ jobs:
         with:
           name: build
           path: |
+            build/*.msi
             build/*.zip
           if-no-files-found: error
